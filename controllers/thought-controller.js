@@ -27,9 +27,22 @@ const thoughtController = {
                 res.sendStatus(400);
             });
     },
-    createThought({ body }, res) {
+    createThought({ params, body }, res) {
         Thought.create(body)
-            .then(thoughtData => res.json(thoughtData))
+            .then(({ _id }) => {
+                return User.findOneAndUpdate(
+                    { _id: params.userId },
+                    { $push: { thoughts: _id } },
+                    { new: true }
+                );
+            })
+            .then(userData => {
+                if (!userData) {
+                    res.status(404).json({ message: 'No user found with this id!' });
+                    return;
+                }
+                res.json(userData);
+            })
             .catch(err => res.json(err));
     },
     updateThought({ params, body }, res) {
@@ -82,7 +95,7 @@ const thoughtController = {
     removeReaction({ params }, res) {
         Thought.findOneAnd(
             { _id: params.thoughtId },
-            { $pull: { reactions: body } },
+            { $pull: { reactions: { reactionId: params.reactionId } } },
             { new: true, runValidators: true }
         )
             .then(thoughtData => {
