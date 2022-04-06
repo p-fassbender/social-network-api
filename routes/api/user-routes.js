@@ -13,14 +13,14 @@ const {
 // /api/user
 router
     .route('/')
-    .get(getAllUsers)
-    .get(createUser);
+    .get(getAllUsers) // works
+    .post(createUser); // works
 
 // /api/user/:id
 router
     .route('/:id')
-    .get(getUserById)
-    .put(updateUser)
+    .get(getUserById) // works
+    .put(updateUser) // works
     .delete(deleteUser);
 
 // /api/user/:userId/friends/:friendId
@@ -28,3 +28,5 @@ router
     .route('/:userId/friends/:friendId')
     .post(addFriend)
     .delete(removeFriend)
+
+module.exports = router;

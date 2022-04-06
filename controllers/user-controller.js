@@ -7,6 +7,10 @@ const userController = {
                 path: 'thoughts',
                 select: '-__v'
             })
+            .populate({
+                path: 'friends',
+                select: '-__v'
+            })
             .select('-__v')
             .then(userData => res.json(userData))
             .catch(err => {
@@ -18,6 +22,10 @@ const userController = {
         User.findOne({ _id: params.id })
             .populate({
                 path: 'thoughts',
+                select: '-__v'
+            })
+            .populate({
+                path: 'friends',
                 select: '-__v'
             })
             .select('-__v')
@@ -55,8 +63,8 @@ const userController = {
             .then(res.json({ message: 'User deleted' }))
             .catch(err => res.status(400).json(err));
     },
-    addFriend({ params }) {
-        User.findOneAndDelete({ _id: params.friendId })
+    addFriend({ params }, res) {
+        User.findOne({ _id: params.friendId })
             .then(addedFriend => {
                 if (!addedFriend) {
                     res.status(404).json({ message: 'No user found with this id!' });
@@ -78,10 +86,10 @@ const userController = {
             .catch(err => res.json(err));
     },
     removeFriend({ params }, res) {
-        User.findOneAndDelete({ _id: params.friendId })
+        User.findOne({ _id: params.friendId })
             .then(deletedFriend => {
                 if (!deletedFriend) {
-                    res.status(404).json({ message: 'No friend found with this id!' });
+                    res.status(404).json({ message: 'No user found with this id!' });
                     return;
                 }
                 return User.findOneAndUpdate(
