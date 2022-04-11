@@ -16,7 +16,7 @@ The aim of this project was to build an API for a social network web application
 * mongoose
 * mongoDB
 
-with a focus on creating the routes, controllers, and models
+with a focus on creating routes, controllers, and models
 
 ---
 
@@ -38,7 +38,14 @@ There are no formal tests for this project
 ---
 
 ## Media
+This video demos the user routes
+https://user-images.githubusercontent.com/36012762/162650842-e0eccbdf-4f48-4432-8bdd-31d9f2bf41d9.mp4
 
+This video demos the thought routes
+https://user-images.githubusercontent.com/36012762/162650863-235900da-5f8f-439f-96e6-3ed94a2b9a88.mp4
+
+This video demos that when deleting a user the user's thoughts are also deleted
+https://user-images.githubusercontent.com/36012762/162650902-b28196ff-52d7-4f9d-97aa-42a982baa212.mp4
 
 The following link is to this project's github repository
 https://github.com/p-fassbender/social-network-api
